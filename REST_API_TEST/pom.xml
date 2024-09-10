@@ -140,3 +140,6 @@
     </build>
 
 </project>
+
+        <!-- mvn clean test generate-test-resources allure::report process-test-resources allure::serve -->
+        <!--allure serve target/allure-results-->
