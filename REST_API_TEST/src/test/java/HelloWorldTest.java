@@ -19,7 +19,7 @@ public class HelloWorldTest {
                .get("https://playground.learnqa.ru/api/hello")
                .jsonPath();
 
-       String answer = response.get("answer4");
+       String answer = response.get("answer");
        if(answer==null){
            System.out.println("The key 'answer4' is absent");
        }else{
@@ -60,6 +60,8 @@ public class HelloWorldTest {
 
         response.prettyPrint();
 
+        System.out.println("=======================================================");
+
         String locationHeader = response.getHeader("Location");
         System.out.println(locationHeader);
 
@@ -72,6 +74,50 @@ public class HelloWorldTest {
 
         int statusCode = response.statusCode();
         System.out.println(statusCode);
+    }
+
+    @Test
+    public void testRestAssuredCookies(){
+        Map<String,String> data = new HashMap<>();
+        data.put("login","secret_login");
+        data.put("password","secret_pass");
+
+        Response responseForGet = RestAssured
+                .given()
+                .body(data)
+                .when()
+                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .andReturn();
+
+//        System.out.println("\nPretty text: ");
+//        response.prettyPrint();
+//
+//        System.out.println("\nHeaders: ");
+//        Headers responseHeaders = response.getHeaders();
+//        System.out.println(responseHeaders);
+//
+//        System.out.println("\nCookies: ");
+//        Map<String,String> responseCookies = response.getCookies();
+//        System.out.println(responseCookies);
+
+        String responseCookie = responseForGet.getCookie("auth_cookie");
+        System.out.println(responseCookie);
+
+        Map<String,String> cookies = new HashMap<>();
+        if (responseCookie !=null){
+            cookies.put("auth_cookie", responseCookie);
+        }
+
+
+        Response responseForCheck = RestAssured
+                .given()
+                .body(data)
+                .cookies(cookies)
+                .when()
+                .post("https://playground.learnqa.ru/api/check_auth_cookie")
+                .andReturn();
+
+        responseForCheck.print();
     }
 
 }
