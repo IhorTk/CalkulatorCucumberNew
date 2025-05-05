@@ -1,1 +1,0 @@
-{key=value, date=2025-05-05, number=61, StringOne=, StringThree=PRODUCT STORE}

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: HomeWork.runner.RunCucumberTest
--------------------------------------------------------------------------------
-Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 32.99 s -- in HomeWork.runner.RunCucumberTest
